@@ -1,3 +1,7 @@
-.container{
+.container {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
 }

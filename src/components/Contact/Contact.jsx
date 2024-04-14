@@ -2,7 +2,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import css from "./Contact.module.css";
 
-export default function Contact({ startValues }) {
+export default function Contact({ startValues, deleteContact }) {
   return startValues.map(elem => (
     <div key={elem.id} className={css.container}>
       <div className={css.contactItem}>
@@ -15,7 +15,10 @@ export default function Contact({ startValues }) {
           {elem.number}
         </p>
       </div>
-      <button className={css.button} type="submit">
+      <button
+        className={css.button}
+        type="submit"
+        onClick={() => deleteContact(elem.id)}>
         Delete
       </button>
     </div>
