@@ -7,7 +7,7 @@ import ContactForm from "../ContactForm/ContactForm.jsx";
 
 export default function App() {
   const [filter, setFilter] = useState("");
-  const [startValues, setStartValues] = useState(() => {
+  const [contactValues, setcontactValues] = useState(() => {
     if (localStorage.getItem("savedContact") !== null) {
       return JSON.parse(localStorage.getItem("savedContact"));
     }
@@ -15,21 +15,21 @@ export default function App() {
   });
 
   useEffect(() => {
-    localStorage.setItem("savedContact", JSON.stringify(startValues));
-  }, [startValues]);
+    localStorage.setItem("savedContact", JSON.stringify(contactValues));
+  }, [contactValues]);
 
-  const filterContact = startValues.filter(elem =>
+  const filterContact = contactValues.filter(elem =>
     elem.name.toLowerCase().includes(filter.toLowerCase().trim())
   );
 
   const addContact = newContact => {
-    setStartValues(prev => {
+    setcontactValues(prev => {
       return [...prev, newContact];
     });
   };
 
   const deleteContact = contactId => {
-    setStartValues(prev => {
+    setcontactValues(prev => {
       return prev.filter(contact => contact.id !== contactId);
     });
   };
@@ -39,7 +39,10 @@ export default function App() {
       <h1> Phonebook </h1>
       <ContactForm addContact={addContact} />
       <SearchBox filter={filter} onFilter={setFilter} />
-      <ContactList startValues={filterContact} deleteContact={deleteContact} />
+      <ContactList
+        contactValues={filterContact}
+        deleteContact={deleteContact}
+      />
     </div>
   );
 }
